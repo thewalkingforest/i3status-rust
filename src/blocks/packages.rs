@@ -254,6 +254,7 @@ pub async fn run(config: &Config, api: &CommonApi) -> Result<()> {
     let aur = any_format_contains!("aur");
     let pacman = any_format_contains!("pacman");
     let dnf = any_format_contains!("dnf");
+    let xbps = any_format_contains!("xbps");
 
     if !config.package_manager.contains(&PackageManager::Apt) && apt {
         config.package_manager.push(PackageManager::Apt);
@@ -266,6 +267,9 @@ pub async fn run(config: &Config, api: &CommonApi) -> Result<()> {
     }
     if !config.package_manager.contains(&PackageManager::Dnf) && dnf {
         config.package_manager.push(PackageManager::Dnf);
+    }
+    if !config.package_manager.contains(&PackageManager::Xbps) && xbps {
+        config.package_manager.push(PackageManager::Xbps);
     }
 
     let warning_updates_regex = config
